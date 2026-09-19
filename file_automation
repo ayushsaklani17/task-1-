@@ -1,0 +1,55 @@
+# CODEALPHA TASK 3
+# Task Automation - JPG File Organizer
+
+import os
+import shutil
+
+# 1. Create source and destination folders
+source_folder = "/content/source"
+destination_folder = "/content/destination"
+
+os.makedirs(source_folder, exist_ok=True)
+os.makedirs(destination_folder, exist_ok=True)
+
+# 2. Create sample JPG files for testing
+for i in range(1, 4):
+    file_path = os.path.join(source_folder, f"photo{i}.jpg")
+    
+    with open(file_path, "w") as file:
+        file.write("Sample JPG file")
+
+# 3. Create a non-JPG file to show filtering
+with open(os.path.join(source_folder, "notes.txt"), "w") as file:
+    file.write("This file should not be moved.")
+
+print("===== CODEALPHA TASK 3 =====")
+print("JPG File Automation\n")
+
+print("Source folder:", source_folder)
+print("Destination folder:", destination_folder)
+
+# 4. Find and move JPG files
+moved_count = 0
+
+for filename in os.listdir(source_folder):
+
+    if filename.lower().endswith(".jpg"):
+
+        source_path = os.path.join(source_folder, filename)
+        destination_path = os.path.join(destination_folder, filename)
+
+        shutil.move(source_path, destination_path)
+
+        print("Moved:", filename)
+
+        moved_count += 1
+
+# 5. Display final result
+print("\n===== AUTOMATION COMPLETED =====")
+print("Total JPG files moved:", moved_count)
+
+print("\nFiles now in destination folder:")
+for filename in os.listdir(destination_folder):
+    print("-", filename)
+
+print("\nTask 3 completed successfully!")
