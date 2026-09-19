@@ -1,0 +1,55 @@
+Task 2: Stock Portfolio Tracker
+
+prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "MSFT": 420,
+    "GOOGL": 175,
+    "AMZN": 190
+}
+
+portfolio = {}
+total_investment = 0
+
+print("===== STOCK PORTFOLIO TRACKER =====")
+print("Available stocks:", ", ".join(prices.keys()))
+
+while True:
+
+    stock = input("\nEnter stock symbol (or 'done' to finish): ").upper()
+
+    if stock == "DONE":
+        break
+
+    if stock not in prices:
+        print("Stock not available. Please choose from the list.")
+        continue
+
+    quantity = int(input(f"Enter quantity of {stock}: "))
+
+    investment = prices[stock] * quantity
+
+    portfolio[stock] = portfolio.get(stock, 0) + quantity
+
+    total_investment += investment
+
+    print(f"{quantity} × {stock} = ${investment:,.2f}")
+
+
+print("\n===== PORTFOLIO SUMMARY =====")
+
+if portfolio:
+
+    for stock, quantity in portfolio.items():
+
+        investment = prices[stock] * quantity
+
+        print(
+            f"{stock}: {quantity} shares × "
+            f"${prices[stock]:,.2f} = ${investment:,.2f}"
+        )
+
+    print(f"\nTotal Investment: ${total_investment:,.2f}")
+
+else:
+    print("No stocks were added.")
