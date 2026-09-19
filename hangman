@@ -1,0 +1,43 @@
+import random
+
+WORDS = ["python", "coding", "developer", "computer", "program"]
+MAX_WRONG_GUESSES = 6
+
+word = random.choice(WORDS)
+guessed_letters = set()
+wrong_guesses = 0
+
+while wrong_guesses < MAX_WRONG_GUESSES:
+
+    display = " ".join(
+        letter if letter in guessed_letters else "_"
+        for letter in word
+    )
+
+    print("\nWord:", display)
+    print("Wrong guesses:", wrong_guesses)
+
+    guess = input("Enter one letter: ").lower().strip()
+
+    if len(guess) != 1 or not guess.isalpha():
+        print("Please enter one letter.")
+        continue
+
+    if guess in guessed_letters:
+        print("Already guessed.")
+        continue
+
+    guessed_letters.add(guess)
+
+    if guess in word:
+        print("Correct!")
+    else:
+        wrong_guesses += 1
+        print("Wrong!")
+
+    if all(letter in guessed_letters for letter in word):
+        print("🎉 You won! The word was:", word)
+        break
+
+else:
+    print("❌ Game Over! The word was:", word)
